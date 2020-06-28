@@ -105,23 +105,23 @@ export default {
 
 * <code>nacosNamingService.<b>registerInstance(serviceName: string, instance: NacosInstanceOptions, groupName?: string)</b></code>
 * <code>nacosNamingService.<b>deregisterInstance(serviceName: string, instance: NacosInstanceOptions, groupName?: string)</b></code>
-* <a href="#getAllInstances"><code>nacosNamingService.<b>getAllInstances(serviceName: string, groupName?: string,
- clusters?: string, subscribe?: boolean)</b></code></a>
-* <a href="#selectInstances"><code>nacosNamingService.<b>selectInstances(serviceName: string, groupName?: string, clusters?: string, healthy?: boolean, subscribe?: boolean)</b></code></a>
-* <a href="#getServerStatus"><code>nacosNamingService.<b>getServerStatus()</b></code></a>
-* <a href="#subscribe"><code>nacosNamingService.<b>subscribe(info: string | { serviceName: string; groupName?: string; clusters?: string }, listener: (instances: NacosInstance[], logger: NacosLogger) => void = () => null)</b></code></a>
-* <a href="#unSubscribe"><code>nacosNamingService.<b>unSubscribe(info: string | { serviceName: string; groupName?: string; clusters?: string }, listener: (instances: NacosInstance[], logger: NacosLogger) => void = () => null)</b></code></a>
-* <a href="#selectOneHealthyInstance"><code>nacosNamingService.<b>selectOneHealthyInstance(serviceName: string, groupName?: string, clusters?: string)</b></code></a>
-* <a href="#axiosRequestInterceptor"><code>nacosNamingService.<b>axiosRequestInterceptor()</b></code></a>
+* <code>nacosNamingService.<b>getAllInstances(serviceName: string, groupName?: string,
+ clusters?: string, subscribe?: boolean)</b></code>
+* <code>nacosNamingService.<b>selectInstances(serviceName: string, groupName?: string, clusters?: string, healthy?: boolean, subscribe?: boolean)</b></code>
+* <code>nacosNamingService.<b>getServerStatus()</b></code>
+* <code>nacosNamingService.<b>subscribe(info: string | { serviceName: string; groupName?: string; clusters?: string }, listener: (instances: NacosInstance[], logger: NacosLogger) => void = () => null)</b></code>
+* <code>nacosNamingService.<b>unSubscribe(info: string | { serviceName: string; groupName?: string; clusters?: string }, listener: (instances: NacosInstance[], logger: NacosLogger) => void = () => null)</b></code>
+* <code>nacosNamingService.<b>selectOneHealthyInstance(serviceName: string, groupName?: string, clusters?: string)</b></code>
+* <code>nacosNamingService.<b>axiosRequestInterceptor()</b></code>
 
 #### NacosConfigService:
 
-* <a href="#getListeners"><code>nacosConfigService.<b>getListeners()</b></code></a>
-* <a href="#getConfigClient"><code>nacosConfigService.<b>getConfigClient()</b></code></a>
-* <a href="#getConfigStore"><code>nacosConfigService.<b>getConfigStore()</b></code></a>
-* <a href="#getConfigKey"><code>nacosConfigService.<b>getConfigKey(dataId: string, groupName = 'DEFAULT_GROUP')</b></code></a>
+* <code>nacosConfigService.<b>getListeners()</b></code>
+* <code>nacosConfigService.<b>getConfigClient()</b></code>
+* <code>nacosConfigService.<b>getConfigStore()</b></code>
+* <code>nacosConfigService.<b>getConfigKey(dataId: string, groupName = 'DEFAULT_GROUP')</b></code>
 
 #### ConfigStore:
-* <a href="#get"><code>configStore.<b>get<T>(configKey: string, defaultConfigData?: T | any)</b></code></a>
-* <a href="#set"><code>configStore.<b>set(configKey: string, configData?: any)</b></code></a>
-* <a href="#onChange"><code>configStore.<b>on('change', (configKey: string, configData: any) => {})</b></code></a>
+* <code>configStore.<b>get<T>(configKey: string, defaultConfigData?: T | any)</b></code>
+* <code>configStore.<b>set(configKey: string, configData?: any)</b></code>
+* <code>configStore.<b>on('change', (configKey: string, configData: any) => {})</b></code>
