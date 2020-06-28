@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@jiaxinjiang/nest-config';
-import { LoggerProvider } from '@jiaxinjiang/nest-logger';
 import { NacosNamingModule, NacosNamingOptions } from './naming';
 import {
   NacosInstanceModule,
@@ -12,20 +11,18 @@ import { NacosConfigModule, ConfigOptionsList, ClientOptions } from './config';
 @Module({
   imports: [
     NacosNamingModule.forRootAsync({
-      useFactory: (configService: ConfigService, logger: LoggerProvider) => {
+      useFactory: (configService: ConfigService) => {
         const nacosConfig = configService.get('nacos');
         const subscribers =
           (nacosConfig.subscribers as NacosSubscribeOptions[]) || [];
         const naming = configService.get('nacos').naming as NacosNamingOptions;
-        logger.setContext('NacosNative');
-        naming.logger = logger;
         naming.appName = naming.appName || configService.get('appName');
         return {
           naming,
           subscribers,
         };
       },
-      inject: [ConfigService, LoggerProvider],
+      inject: [ConfigService],
     }),
     NacosInstanceModule.forRootAsync({
       useFactory: (configService: ConfigService) => {
@@ -45,7 +42,7 @@ import { NacosConfigModule, ConfigOptionsList, ClientOptions } from './config';
       inject: [ConfigService],
     }),
     NacosConfigModule.forRootAsync({
-      useFactory: (configService: ConfigService, logger: LoggerProvider) => {
+      useFactory: (configService: ConfigService) => {
         const {
           naming,
           configs,
@@ -61,10 +58,9 @@ import { NacosConfigModule, ConfigOptionsList, ClientOptions } from './config';
         return {
           client,
           configs,
-          logger: logger.setContext('NacosConfig'),
         };
       },
-      inject: [ConfigService, LoggerProvider],
+      inject: [ConfigService],
     }),
   ],
   providers: [],
