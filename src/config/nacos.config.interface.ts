@@ -6,10 +6,6 @@ export type ClientOptions = ClientOptionsNative & {
   leaderPort?: number;
 };
 
-export interface ConfigOptionsList {
-  [key: string]: ConfigOptions;
-}
-
 export interface ConfigOptions {
   dataId: string;
   groupName: string;
@@ -20,7 +16,7 @@ export interface ConfigOptions {
 
 export interface ConfigClientOptions {
   client: ClientOptions;
-  configs: ConfigOptionsList;
+  configs: ConfigOptions[];
   logger?: Logger | LoggerService;
   loggerLevel?: 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';
 }

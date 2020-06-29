@@ -6,7 +6,7 @@ import {
   NacosInstanceOptions,
   NacosSubscribeOptions,
 } from './instance';
-import { NacosConfigModule, ConfigOptionsList, ClientOptions } from './config';
+import { NacosConfigModule, ConfigOptions, ClientOptions } from './config';
 
 @Module({
   imports: [
@@ -49,7 +49,7 @@ import { NacosConfigModule, ConfigOptionsList, ClientOptions } from './config';
           client,
         }: {
           naming: NacosNamingOptions;
-          configs: ConfigOptionsList;
+          configs: ConfigOptions[];
           client: ClientOptions;
         } = configService.get('nacos');
         client.appName = client.appName || configService.get('appName');

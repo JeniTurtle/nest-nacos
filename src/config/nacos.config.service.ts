@@ -57,7 +57,7 @@ export class NacosConfigService {
     this.configClient = new NacosConfigClient(this.options.client);
     await this.configClient.ready();
 
-    for (const configOptions of Object.values(this.options.configs)) {
+    for (const configOptions of (this.options.configs || [])) {
       const { dataId, groupName, options = {} } = configOptions;
       const configKey = this.getConfigKey(dataId, groupName);
       const remoteConfig = await this.configClient.getConfig(

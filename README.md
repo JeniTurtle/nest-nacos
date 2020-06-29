@@ -56,7 +56,7 @@ NEST_NACOS_CONFIG_ID_BASIC=basic.config.yml
 
 import {
   ClientOptions,
-  ConfigOptionsList,
+  ConfigOptions,
   NacosInstanceOptions,
   NacosNamingOptions,
   NacosSubscribeOptions,
@@ -81,12 +81,10 @@ export default {
     leaderPort: Number(`45${Math.floor(Math.random() * 900) + 100}`),
     serverAddr: NEST_NACOS_SERVER_LIST.split(',')[0],
   } as ClientOptions,
-  configs: {
-    basic: {
+  configs: [{
       dataId: NEST_NACOS_CONFIG_ID_BASIC,
       groupName: NEST_NACOS_GROUP_NAME,
-    },
-  } as ConfigOptionsList,
+  }] as ConfigOptions[],
   subscribers: [
     // Services to be monitored
     {
