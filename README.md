@@ -21,7 +21,7 @@ npm install @jiaxinjiang/nest-nacos --save
 
 ### Getting Started
 
-First, you need to define the log configuration file. You must rely on the `@jiaxinjiang/nest-config` module.
+You can use the `@jiaxinjiang/nest-config` package to configure Nacos.
 
 Directory structure:
 
@@ -46,7 +46,7 @@ NEST_NACOS_SERVER_LIST=192.168.0.102:8848
 
 NEST_NACOS_NAMESPACE=d8bcbaad-f3d1-40d8-9d55-a03cafea5299
 
-NEST_NACOS_GROUP_NAME=DEV_GROUP
+NEST_NACOS_GROUP_NAME=dev
 
 NEST_NACOS_CONFIG_ID_BASIC=basic.config.yml
 ```
@@ -89,12 +89,94 @@ export default {
     // Services to be monitored
     {
       serviceName: 'service-1',
+      groupName: 'nodejs',
     },
     {
       serviceName: 'service-2',
+      groupName: 'nodejs',
     },
   ] as NacosSubscribeOptions[],
 };
+```
+
+Module introduction example:
+
+```ts
+import { Module } from '@nestjs/common';
+import { ConfigService } from '@jiaxinjiang/nest-config';
+import { LoggerProvider } from '@jiaxinjiang/nest-logger';
+import {
+  NacosNamingModule,
+  NacosNamingOptions,
+  NacosInstanceModule,
+  NacosInstanceOptions,
+  NacosSubscribeOptions,
+  NacosConfigModule,
+  ConfigOptions,
+  ClientOptions,
+} from '@jiaxinjiang/nest-nacos';
+
+@Module({
+  imports: [
+    NacosNamingModule.forRootAsync({
+      useFactory: (configService: ConfigService, logger: LoggerProvider) => {
+        const nacosConfig = configService.get('nacos');
+        const subscribers =
+          (nacosConfig.subscribers as NacosSubscribeOptions[]) || [];
+        const naming = configService.get('nacos').naming as NacosNamingOptions;
+        naming.logger = logger;
+        naming.appName = naming.appName || configService.get('appName');
+        return {
+          naming,
+          subscribers,
+        };
+      },
+      inject: [ConfigService, LoggerProvider],
+    }),
+    NacosInstanceModule.forRootAsync({
+      useFactory: (configService: ConfigService) => {
+        const nacosConfig = configService.get('nacos');
+        const instance = nacosConfig.instance as NacosInstanceOptions;
+        const subscribers =
+          (nacosConfig.subscribers as NacosSubscribeOptions[]) || [];
+        instance.serviceName =
+          instance.serviceName || configService.get('appName');
+        instance.ip = instance.ip || configService.get('ip');
+        instance.port = instance.port || configService.get('port');
+        return {
+          instance,
+          subscribers,
+        };
+      },
+      inject: [ConfigService],
+    }),
+    NacosConfigModule.forRootAsync({
+      useFactory: (configService: ConfigService, logger: LoggerProvider) => {
+        const {
+          naming,
+          configs,
+          client,
+        }: {
+          naming: NacosNamingOptions;
+          configs: ConfigOptions[];
+          client: ClientOptions;
+        } = configService.get('nacos');
+        client.appName = client.appName || configService.get('appName');
+        client.serverAddr = client.serverAddr || naming.serverList[0];
+        client.namespace = client.namespace || naming.namespace;
+        return {
+          client,
+          configs,
+          logger,
+        };
+      },
+      inject: [ConfigService, LoggerProvider],
+    }),
+  ],
+  providers: [],
+  exports: [],
+})
+export class NacosModule {}
 ```
 
 ### API
