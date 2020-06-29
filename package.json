@@ -1,6 +1,6 @@
 {
   "name": "@jiaxinjiang/nest-nacos",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Nacos component for NestJs.",
   "keywords": [
     "nest",
@@ -11,7 +11,7 @@
     "build": "tsc -d"
   },
   "dependencies": {
-    "@jiaxinjiang/nest-config": "^1.0.1",
+    "@jiaxinjiang/nest-config": "^1.0.4",
     "axios": "^0.19.2",
     "nacos": "^2.0.0",
     "reflect-metadata": "^0.1.12"
