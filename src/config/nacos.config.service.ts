@@ -54,7 +54,7 @@ export class NacosConfigService {
 
   async init() {
     this.logger.log('Nacos Config Initializing...');
-    this.configClient = new NacosConfigClient(this.options.client);
+    this.configClient = new NacosConfigClient(this.options.configClient);
     await this.configClient.ready();
 
     for (const configOptions of (this.options.configs || [])) {

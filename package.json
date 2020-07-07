@@ -1,6 +1,6 @@
 {
   "name": "@jiaxinjiang/nest-nacos",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Nacos component for NestJs.",
   "keywords": [
     "nest",

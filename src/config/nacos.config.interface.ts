@@ -15,7 +15,7 @@ export interface ConfigOptions {
 }
 
 export interface ConfigClientOptions {
-  client: ClientOptions;
+  configClient: ClientOptions;
   configs: ConfigOptions[];
   logger?: Logger | LoggerService;
   loggerLevel?: 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';
