@@ -55,6 +55,7 @@ NEST_NACOS_CONFIG_ID_BASIC=basic.config.yml
 // nacos.config.ts
 
 import {
+  NestNacosConfig,
   ClientOptions,
   ConfigOptions,
   NacosInstanceOptions,
@@ -77,9 +78,10 @@ export default {
   instance: {
     groupName: NEST_NACOS_GROUP_NAME,
   } as NacosInstanceOptions,
-  client: {
+  configClient: {
     leaderPort: Number(`45${Math.floor(Math.random() * 900) + 100}`),
     serverAddr: NEST_NACOS_SERVER_LIST.split(',')[0],
+    namespace: NEST_NACOS_NAMESPACE,
   } as ClientOptions,
   configs: [{
       dataId: NEST_NACOS_CONFIG_ID_BASIC,
@@ -96,7 +98,7 @@ export default {
       groupName: 'nodejs',
     },
   ] as NacosSubscribeOptions[],
-};
+} as NestNacosConfig;
 ```
 
 Module introduction example:
